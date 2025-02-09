@@ -1,4 +1,3 @@
-import React from 'react';
 import BurgerMenu from './components/BurgerMenu';
 import Icon from '../../components/Icon/Icon';
 import refreshIcon from "../../assets/refresh.png"

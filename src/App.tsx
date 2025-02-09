@@ -1,5 +1,4 @@
-// src/App.tsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "./containers/Header/Header";
 import Stats from "./containers/Stats/Stats";
 import Chart from "./components/Chart/Chart";
@@ -42,7 +41,7 @@ const generateRandomChartData = (): ChartData => {
 };
 
 const App = () => {
-  const [dashboardData, setDashboardData] = useState<DashboardData>(() => {
+  const [dashboardData] = useState<DashboardData>(() => {
     const stored = localStorage.getItem("dashboardData");
     return stored ? JSON.parse(stored) : initialData;
   });

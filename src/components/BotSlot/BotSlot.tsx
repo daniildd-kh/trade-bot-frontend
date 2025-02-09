@@ -1,4 +1,3 @@
-import React from "react";
 import noBot from "../../assets/white_bot.png";
 import Icon from "../Icon/Icon";
 import energyLeft from "../../assets/energy-left.png";

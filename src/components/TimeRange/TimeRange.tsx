@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TimeButton from "./components/TimeButton";
 
 interface TimeRangeProps {

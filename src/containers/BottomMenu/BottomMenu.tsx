@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DashboardIcon from "../../assets/dashboard.png";
 import MegaBot from "../../assets/megabot-menu.png";
 import BotMarket from "../../assets/market.png";

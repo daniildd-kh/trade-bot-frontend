@@ -1,4 +1,3 @@
-import React from "react";
 import Icon from "../../../components/Icon/Icon";
 import coinIcon from "../../../assets/currency.png";
 

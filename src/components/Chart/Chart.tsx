@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Chart, ChartConfiguration } from "chart.js/auto";
 
 interface ChartData {

@@ -1,4 +1,3 @@
-import React from "react";
 import Balance from "./components/Balance";
 import { CurrencyVariant, StatusProps } from "./types";
 

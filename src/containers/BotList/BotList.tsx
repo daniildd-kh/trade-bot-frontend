@@ -1,9 +1,5 @@
-// src/containers/BotList/BotList.tsx
-import React from "react";
 import BotSlot from "../../components/BotSlot/BotSlot";
 import { BotType } from "../../App";
-
-// Импорт изображений для ботов
 import yellowBotImg from "../../assets/yellow_bot.png";
 import whiteBotImg from "../../assets/white_bot.png";
 import greenBotImg from "../../assets/green_bot.png";
