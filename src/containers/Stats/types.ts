@@ -1,5 +1,5 @@
 export enum CurrencyVariant {
-  BTC = "BTC",
+  ETH = "ETH",
 }
 
 export interface StatusProps {

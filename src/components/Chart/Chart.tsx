@@ -1,14 +1,23 @@
 import React, { useRef, useEffect } from "react";
-import { Chart, ChartConfiguration, Ticks } from "chart.js/auto";
+import { Chart, ChartConfiguration } from "chart.js/auto";
 
-const LineChart: React.FC = () => {
+interface ChartData {
+  centerValue: string;
+  dates: string[];
+  dataPoints: number[];
+}
+
+interface ChartProps {
+  chartData: ChartData;
+  updateTrigger?: number;
+}
+
+const LineChart = ({ chartData, updateTrigger }:ChartProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  let chartInstance: Chart | undefined;
+  const chartInstanceRef = useRef<Chart | null>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
-
-    const ctx = canvasRef.current.getContext("2d");
+    const ctx = canvasRef.current?.getContext("2d");
     if (!ctx) return;
 
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -18,11 +27,11 @@ const LineChart: React.FC = () => {
     const config: ChartConfiguration<"line", number[], string> = {
       type: "line",
       data: {
-        labels: ["22.04", "23.04", "24.04", "25.04", "26.04"],
+        labels: chartData.dates,
         datasets: [
           {
             label: "Доходность",
-            data: [60, 45, 80, 30, 35],
+            data: chartData.dataPoints,
             backgroundColor: gradient,
             borderColor: "#005FA7",
             pointBackgroundColor: "#89C5F0",
@@ -64,17 +73,16 @@ const LineChart: React.FC = () => {
       },
     };
 
-    chartInstance = new Chart(ctx, config);
-
-    return () => {
-      chartInstance?.destroy();
-    };
-  }, []);
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.destroy();
+    }
+    chartInstanceRef.current = new Chart(ctx, config);
+  }, [chartData, updateTrigger]);
 
   return (
     <div className="w-full bg-[#102035] relative">
       <span className="text-[#5FA753] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[20px]">
-        +32.6%
+        {chartData.centerValue}
       </span>
       <canvas ref={canvasRef} className="w-full block" />
     </div>

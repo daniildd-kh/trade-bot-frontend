@@ -5,7 +5,7 @@ interface TimeRangeProps {
   onChange: (range: string) => void;
 }
 
-const TimeRange = ({ onChange }:TimeRangeProps) => {
+const TimeRange = ({ onChange }: TimeRangeProps) => {
   const [activeRange, setActiveRange] = useState("24h");
   const ranges = ["24h", "7 days", "30 days", "All time"];
 

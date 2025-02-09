@@ -9,7 +9,7 @@ const Stats = ({
   capital,
   balance = 0,
   onHold = 0,
-  currencyVariant = CurrencyVariant.BTC,
+  currencyVariant = CurrencyVariant.ETH,
 }: StatusProps) => {
   return (
     <div className="flex justify-between pt-[3px]">

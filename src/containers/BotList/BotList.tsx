@@ -1,34 +1,68 @@
-import React, { useState } from "react";
+// src/containers/BotList/BotList.tsx
+import React from "react";
 import BotSlot from "../../components/BotSlot/BotSlot";
-import attackOrangeBot from "../../assets/attack-orange.png";
-import balanceBot from "../../assets/balance.png";
-import defenceBot from "../../assets/defence.png";
-import attackRedBot from "../../assets/attack-red.png";
-import MegaBot from "../../components/MegaBot/MegaBot";
+import { BotType } from "../../App";
 
-const bots = [
-  { id: 1, botName: "attack", profit: -8.2, botSrc: attackOrangeBot },
-  { id: 2, botName: "" },
-  { id: 3, botName: "balance", profit: -3.7, botSrc: defenceBot },
-  { id: 4, botName: "defence", profit: 2.5, botSrc: defenceBot },
-  { id: 5, isMegaBot: true, profit: 3.6, },
-  { id: 6, botName: "attack", profit: 13.7, botSrc: attackRedBot },
-];
+// Импорт изображений для ботов
+import yellowBotImg from "../../assets/yellow_bot.png";
+import whiteBotImg from "../../assets/white_bot.png";
+import greenBotImg from "../../assets/green_bot.png";
+import redBotImg from "../../assets/red_bot.png";
+import blueBotImg from "../../assets/blue_bot.png";
+import orangeBotImg from "../../assets/orange_bot.png";
 
-const BotList = () => {
-  const [selectedBot, setSelectedBot] = useState<number | null>(null);
+interface BotListProps {
+  bots: BotType[];
+  timeRange: string;
+  selectedBot: number | null;
+  onBotSelect: (selectedBotIndex: number, botName: string) => void;
+}
 
+const getProfitForTimeRange = (bot: BotType, timeRange: string): number => {
+  switch (timeRange) {
+    case "24h":
+      return bot["24h"];
+    case "7 days":
+      return bot["7d"];
+    case "30 days":
+      return bot["30d"];
+    case "All time":
+      return bot["all_time"];
+    default:
+      return bot["24h"];
+  }
+};
+
+const getBotImage = (name: string): string => {
+  if (name === "yellow_bot") return yellowBotImg;
+  switch (name) {
+    case "white_bot":
+      return whiteBotImg;
+    case "green_bot":
+      return greenBotImg;
+    case "red_bot":
+      return redBotImg;
+    case "blue_bot":
+      return blueBotImg;
+    case "orange_bot":
+      return orangeBotImg;
+    default:
+      return "";
+  }
+};
+
+const BotList = ({ bots, timeRange, selectedBot, onBotSelect }:BotListProps) => {
   return (
     <div className="flex gap-[1px] flex-wrap pt-[5px]">
-      {bots.map(({ id, botName, profit, botSrc, isMegaBot }) => (
+      {bots.map((bot, index) => (
         <BotSlot
-          key={id}
-          botName={botName}
-          profit={profit}
-          botSrc={botSrc}
-          isMegaBot={isMegaBot}
-          isSelected={selectedBot === id}
-          onSelect={() => setSelectedBot(id)}
+          key={index}
+          botName={bot.name}
+          profit={getProfitForTimeRange(bot, timeRange)}
+          botSrc={getBotImage(bot.name)}
+          isSelected={selectedBot === index}
+          onSelect={() => onBotSelect(index, bot.name)}
+          isMegaBot={bot.name === "yellow_bot"}
         />
       ))}
     </div>
